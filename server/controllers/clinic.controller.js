@@ -1,7 +1,8 @@
 const Clinic = require('../models/clinic.model');
 
+
 module.exports.findAll = (req, res) => {
-    Clinic.find().sort({createdAt: -1})
+    Clinic.find().sort({averagerating: -1})
     .then((allclinics) => {
         res.json({clinics: allclinics})
     })
@@ -116,7 +117,7 @@ module.exports.createReview = (req, res) => {
     )
     .then((updateclinic) => {
         // Calculate average rating and update the document
-        const averageRating = updateclinic.totalrating / updateclinic.totalreview;
+        const averageRating = (updateclinic.totalrating / updateclinic.totalreview).toFixed(2);
         return Clinic.findByIdAndUpdate(
             req.params.id,
             { $set: { averagerating: averageRating } },
@@ -140,3 +141,4 @@ module.exports.findAllbyCity = (req, res) => {
         res.json({message: "Something went wrong", error: err})
     })
 }
+

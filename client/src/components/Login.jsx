@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../AuthContext';
 import { useNavigate } from 'react-router-dom';
+import loginphoto from '../images/login.jpg'
 
 const Login = () => {
     const { login } = useAuth();
@@ -23,19 +24,26 @@ const Login = () => {
     };
 
     return (
-        <div>
-            <form onSubmit={handleLogin}>
+        <div className='login-container'>
+            <img className='login-photo' src={loginphoto} alt="" />
+            <form className='login-form' onSubmit={handleLogin}>
                 
-                    < div>
-                        <div>
-                            <label>Email:</label>
+                    < div className='form-group'>
+                        <h1>Login</h1>
+                        <div  >
+                            <label style={{textAlign:"left"}}>Email:</label>
                             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                         </div>
-                        <div>
-                            <label>Password:</label>
+                        <div className='mt-2'>
+                            <label  style={{textAlign:"left"}}>Password:</label>
                             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
                         <button type="submit">Login</button>
+                    <div>
+                        <p>Don't have an account? <br /> <a href="/register">Register</a></p>
+
+                    </div>
+                        
                     </div>
 
                   

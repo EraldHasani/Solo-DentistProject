@@ -52,7 +52,7 @@ const Clinic = new mongoose.Schema({
         {
             servicesTitle: { 
                 type: String,
-                minLength: [10, 'The title should be more then 10 characters'],
+                minLength: [5, 'The title should be more then 10 characters'],
             },
             servicesDescription: {
                 type: String,
@@ -152,7 +152,7 @@ const Clinic = new mongoose.Schema({
 
    
    
-
+   
      
     
 

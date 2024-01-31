@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, DatePicker, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import DatePicker from "react-datepicker";
+import VideoLogo from "../images/VideoLogo.mp4";
+import { SocialIcon } from 'react-social-icons'
+
+
 
 const BookAppointment = ({ user, clinicId }) => {
   const [availableDates, setAvailableDates] = useState([]);
@@ -12,7 +17,7 @@ const BookAppointment = ({ user, clinicId }) => {
     // Fetch available dates for the clinic from the server
     const fetchAvailableDates = async () => {
       try {
-        const response = await axios.get(⁠/api/clinics / ${ clinicId } / available - dates ⁠);
+        const response = await axios.get(`/api/clinics/${clinicId}/available-dates`);
         setAvailableDates(response.data.availableDates);
       } catch (error) {
         console.error('Error fetching available dates:', error);
@@ -27,7 +32,7 @@ const BookAppointment = ({ user, clinicId }) => {
     const fetchAvailableSlots = async () => {
       try {
         if (selectedDate) {
-          const response = await axios.get(⁠ /api/clinics / ${ clinicId } / available - slots ? date = ${ selectedDate } ⁠);
+          const response = await axios.get(`/api/clinics/${clinicId}/available-slots?date=${selectedDate}`);
           setAvailableSlots(response.data.availableSlots);
         }
       } catch (error) {
@@ -67,9 +72,9 @@ const BookAppointment = ({ user, clinicId }) => {
     <div>
       <h2>Select Appointment Date</h2>
       <DatePicker
-        value={selectedDate}
+        selected={selectedDate}
         onChange={handleDateChange}
-        renderInput={(params) => <input {...params.inputProps} />}
+        dateFormat="yyyy-MM-dd"
       />
       {selectedDate && (
         <div>
@@ -94,14 +99,46 @@ const BookAppointment = ({ user, clinicId }) => {
       <h2>Available Slots</h2>
       <ul>
         {availableSlots.map((slot) => (
-          <li key={slot}>{slot}</li>
+          <li key={slot}> {slot}</li>
         ))}
       </ul>
       <Button variant="contained" onClick={handleBooking} disabled={!selectedDate || !selectedSlot}>
         Book Appointment
       </Button>
+
+
+      <footer className="footer" >
+                    <div className="footer footer-content   align-items-center d-flex justify-content-evenly">
+                        <div>
+                            <video autoPlay loop muted src={VideoLogo} width="200" height="200"></video>
+
+                        </div>
+                        <div className="footer-section about">
+                            <h1 className="logo-text m-3">Albania Dental  Travel</h1>
+                            <p>  We help to find the best Albanian Dental clinics for your needs. </p>
+                        </div>
+
+                        <div className="socials m-3">
+                            <SocialIcon className="m-2" url="https://www.facebook.com/" />
+                            <SocialIcon className="m-2" url="https://www.instagram.com/" />
+                            <SocialIcon className="m-2" url="https://www.twitter.com/" />
+                            <SocialIcon className="m-2" url="https://www.youtube.com/" />
+
+                            <div className="contact m-3">
+                                <span><i className="fas fa-phone"> Celular :</i> &nbsp; (+355)69123456</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </footer>
     </div>
+    
   );
 };
+
 
 export default BookAppointment;

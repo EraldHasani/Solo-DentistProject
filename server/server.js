@@ -14,6 +14,7 @@ app.use(cors({
   }));
   app.use(cookieParser());
 
+
 require('./config/mongoose.config');  
  
 require('./routes/user.routes')(app);

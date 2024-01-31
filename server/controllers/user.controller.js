@@ -46,3 +46,15 @@ module.exports.register = async (req, res) => {
 module.exports.logout = (req, res) => {
     res.clearCookie('token').sendStatus(200).json({message: "Succesfully logged out!"});
 }
+
+
+module.exports.getOneUserbyId= (req, res) => {
+    try{
+        User.findOne({_id: req.params.id})
+        .then((user) => res.json(user))
+        .catch((err) => res.status(400).json(err))
+    }
+    catch (err){
+        res.status(400).json(err)
+    }
+}

@@ -7,6 +7,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
+
   const login = async (email, password) => {
     try {
       const response = await axios.post('http://localhost:8000/api/login', {
@@ -22,11 +23,14 @@ export const AuthProvider = ({ children }) => {
       const { token:token, user: userData } = data;
 
       // Set the user state
+      console.log(userData)
       setUser(userData);
      
       // Store the token in localStorage or a cookie
       localStorage.setItem('token', token);
-      localStorage.setItem('user', userData);
+      const userDataString = JSON.stringify(userData);
+      localStorage.setItem('user', userDataString);
+
       localStorage.setItem('userId', userData._id);
 
 
@@ -37,12 +41,51 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const register = async (firstName, lastName, email, password, confirmPassword) => {
+  const register = async (firstNameDentist, lastNameDentist, emailDentist , passwordDentist, confirmPasswordDentist,roleDentist, nipt) => {
+    try {
+      const response = await axios.post('http://localhost:8000/api/register', {
+        firstName: firstNameDentist,
+        lastName: lastNameDentist,
+        email: emailDentist,
+        password: passwordDentist,
+        confirmPassword: confirmPasswordDentist,
+        role: roleDentist,
+        nipt: nipt,
+
+      },{
+        withCredentials: true,
+      });
+
+      const { data } = response;
+
+      // Assuming the server sends back a JWT token
+      const { token, user: userData } = data;
+      
+      // Set the user state
+      setUser(userData);
+
+      // Store the token in localStorage or a cookie
+      localStorage.setItem('token', token);
+      localStorage.setItem('userId', userData._id);
+      const userDataString = JSON.stringify(userData);
+      localStorage.setItem('user', userDataString);
+
+      return userData; // You might want to return user data for further use
+    } catch (error) {
+      console.error('Registration failed:', error.message);
+      console.log(error)
+      throw error;
+    }
+  };
+
+
+  const registerClient = async (firstName, lastName, email, roleClient, password, confirmPassword) => {
     try {
       const response = await axios.post('http://localhost:8000/api/register', {
         firstName,
         lastName,
         email,
+       role: roleClient,
         password,
         confirmPassword,
 
@@ -61,6 +104,8 @@ export const AuthProvider = ({ children }) => {
       // Store the token in localStorage or a cookie
       localStorage.setItem('token', token);
       localStorage.setItem('userId', userData._id);
+      const userDataString = JSON.stringify(userData);
+      localStorage.setItem('user', userDataString);
 
       return userData; // You might want to return user data for further use
     } catch (error) {
@@ -90,7 +135,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, register }}>
+    <AuthContext.Provider value={{ user, login, logout, register,registerClient }}>
       {children}
     </AuthContext.Provider>
   );

@@ -6,7 +6,8 @@ const UserSchema = new mongoose.Schema({
     role:{ 
         type: String,
         required: [true, "Role is required"],
-        default: "user",
+        default: "client",
+        
             
     },
     
