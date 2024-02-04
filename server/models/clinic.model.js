@@ -15,6 +15,12 @@ const Clinic = new mongoose.Schema({
         minLength: [5, 'The adress should be more then 5 characters'],
         required: [true, 'The adress is required']
     },
+    // lat: {
+    //     type: Number
+    // },
+    // long: {
+    //     type: Number
+    // },
     city:{
         type: String,
         required: [true, 'The city is required']
@@ -33,8 +39,16 @@ const Clinic = new mongoose.Schema({
         type: String,
     },
     clinicImages:{
-        type: String,
-    },
+        type : String}, 
+
+     clinicImages1: {
+            type: String,
+        },
+        clinicImages2: {
+            type: String,
+        },
+        
+  
     cash:{
         type: Boolean,
         default: false,

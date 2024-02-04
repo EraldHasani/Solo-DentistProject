@@ -142,3 +142,45 @@ module.exports.findAllbyCity = (req, res) => {
     })
 }
 
+
+// module.exports.create = async (req, res) => {
+//     const coordinates = await getLatLongFromAddress(req.body.address);
+//     const clinic = {
+//         title: req.body.title,
+//         address: req.body.address,
+//         description: req.body.description,
+//         lat: coordinates.lat,
+//         long: coordinates.long,
+//         city: req.body.city,
+//         phone: req.body.phone,
+//         email: req.body.email,
+//         image: req.body.image,
+//         clinicImages: req.body.clinicImages,
+//         clinicImages1: req.body.clinicImages1,
+//         clinicImages2: req.body.clinicImages2,
+//         cash: req.body.cash,
+//         card: req.body.card,
+//         bankTransfer: req.body.bankTransfer,
+//         sherbime: req.body.sherbime,
+//         reviews: req.body.reviews,
+//         totalreview: req.body.totalreview,
+//         totalrating: req.body.totalrating,
+//         averagerating: req.body.averagerating,
+//         staff: req.body.staff,
+//         userId: req.body.userId
+//     }
+//     console.log(coordinates);
+//     Clinic.create(clinic)
+//         .then(newlyCreatedClinic => {
+//             res.json({
+//                 clinic: newlyCreatedClinic
+//             })
+//         })
+//         .catch((err) => {
+//             console.log(err)
+//             res.json({
+//                 message: 'Something went wrong',
+//                 error: err
+//             })
+//         });
+// }

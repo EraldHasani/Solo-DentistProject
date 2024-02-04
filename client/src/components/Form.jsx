@@ -24,6 +24,8 @@ const Form = (props) => {
     const [image, setImage] = useState("");
     const [desc, setDesc] = useState("");
     const [clinicImages, setClinicImages] = useState("");
+    const [clinicImages1, setClinicImages1] = useState("");
+    const [clinicImages2, setClinicImages2] = useState("");
     const [sherbime, setSherbime] = useState("");
     const [cash, setCash] = useState(false);
     const [creditCard, setCreditCard] = useState(false);
@@ -61,7 +63,7 @@ const Form = (props) => {
         e.preventDefault();
 
         if (title.length < 5 || address.length < 5 || city.length < 3 || phone.length < 10 || description.length < 10) {
-            setErrors("Form has some problems")
+            setErrors("Ju lutem plotesoni sakt te dhenat tuaja")
         }
 
         else {
@@ -75,6 +77,8 @@ const Form = (props) => {
                 email: email,
                 image: image,
                 clinicImages: clinicImages,
+                clinicImages1: clinicImages1,
+                clinicImages2: clinicImages2,
                 cash: cash,
                 card: creditCard,
                 bankTransfer: bankTransfer,
@@ -305,7 +309,11 @@ const Form = (props) => {
                     <label htmlFor="email">Email</label>
                     <input type="email" name="email" className="form-control" onChange={(e) => setEmail(e.target.value)} placeholder="Please enter your Email" />
                 </div>
+                    {
+                        email.length > 0 && !validateEmail(email) ?
+                            <p className="text-danger"> Email sholud be correct! </p> : null
 
+                    }
 
 
                 <div className="form-group">
@@ -326,15 +334,20 @@ const Form = (props) => {
                 }
                 <div className="form-group">
                     <label htmlFor="image">Image</label>
-                    <input type="file" multiple name="image" className="form-control" onChange={(e) => setImage(e.target.value)} placeholder="Please add one display image " />
+                    <input type="text" multiple name="image" className="form-control" onChange={(e) => setImage(e.target.value)} placeholder="Please add one display image " />
                 </div>
                 {
                     image.length > 0 && image.length < 1 ?
                         <p className="text-danger"> Please upload an image! </p> : null
                 }
-                <div>
+                <div> 
                     <label htmlFor="clinicImages">Clinic Images</label>
-                    <input type="file" name="clinicImages" className="form-control" onChange={(e) => setClinicImages(e.target.value)} placeholder="Please add some images of your clinic" />
+                    <label htmlFor="clinicImages"> Image 1</label>
+                    <input type="text" name="clinicImages" className="form-control" onChange={(e) => setClinicImages(e.target.value)} placeholder="Please add some images of your clinic" />
+                    <label htmlFor="clinicImages">Image 2</label>
+                    <input type="text" name="clinicImages" className="form-control" onChange={(e) => setClinicImages1(e.target.value)} placeholder="Please add some images of your clinic" />
+                    <label htmlFor="clinicImages">Image 3</label>
+                    <input type="text" name="clinicImages" className="form-control" onChange={(e) => setClinicImages2(e.target.value)} placeholder="Please add some images of your clinic" />
                 </div>
       <div>
 
@@ -356,14 +369,7 @@ const Form = (props) => {
                         <input type="checkbox" className="checkbox" onChange={(e) => setBankTransfer(e.target.checked)} checked={bankTransfer} />
                     </div>
                 </div>
-                <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="photo">Upload Photo:</label>
-        <input type="file" id="photo" name="photo" onChange={handlePhotoChange} />
-      </div>
-      <button type="submit">Submit</button>
-    </form>
- 
+         
 
                 <button type="button" className="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#shtoSherbim">
                     Shto Sherbim </button>
@@ -486,7 +492,8 @@ const Form = (props) => {
                                         <div>
                                             <label > Emri</label>
                                             <input type="text" value={firstName} name="staff" className="form-control" placeholder="Emri "
-                                                onChange={(e) => setFirstName(e.target.value)} /></div>
+                                                onChange={(e) => setFirstName(e.target.value)} />
+                                        </div>
                                         <div>
                                             {
                                                 firstName.length > 0 && firstName.length < 3 ?
@@ -506,7 +513,8 @@ const Form = (props) => {
                                             <label >Eksperienca</label>
 
                                             <input type="number" value={experience} name="staff" min="0" className="form-control" placeholder="Vitet e eksperiences "
-                                                onChange={(e) => setExperience(e.target.value)} /></div>
+                                                onChange={(e) => setExperience(e.target.value)} />
+                                                </div>
                                         <div>
 
                                             <label >Specializimi</label>
@@ -531,7 +539,7 @@ const Form = (props) => {
                                             }
                                             <label >Foto personit</label>
 
-                                            <input type="file" value={imageStaff} name="staff" className="form-control" placeholder="Foto e staffit"
+                                            <input type="text" value={imageStaff} name="staff" className="form-control" placeholder="Foto e staffit"
                                                 onChange={(e) => setImageStaff(e.target.value)} /></div>
 
                                     </div>
@@ -556,7 +564,7 @@ const Form = (props) => {
                                       <div className="cardservice ">
                                       <div className="cardservice-body ">
                                                             <h5 className="card-title mb-4">{staff.firstName} {staff.lastName}</h5>
-                                                            <p className="card-text">Eksperienca: {staff.experience} years</p>
+                                                            <p className="card-text">Eksperienca: {staff.experience} vite</p>
                                                             <p className="card-text">Ekspertiza: {staff.expertise}</p>
                                                             <p className="card-text">Edukimi: {staff.education}</p>
                                                             <p className="card-text">Foto: {staff.imageStaff}</p>

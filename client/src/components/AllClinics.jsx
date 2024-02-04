@@ -64,6 +64,8 @@ const AllClinics = (props) => {
         setReset(true);
     };
 
+
+
     return (
         <>
 
@@ -130,7 +132,10 @@ const AllClinics = (props) => {
                                 <div className="cardsingle ">
 
                                     <div className="infossingle">
-                                        <div className="imagesingle"></div>
+                                        <div className="imagesingle">
+                                        <img src={clinic.image} width={"100%"} height={"100%"} alt="image clinic" />
+
+                                        </div>
                                         <div className="infosingle">
                                             <div>
                                                 <p className="namesingle">

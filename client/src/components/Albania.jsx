@@ -26,8 +26,10 @@ const Albania = () => {
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+
     };
 
+  
 
     return (
         <>
@@ -39,6 +41,7 @@ const Albania = () => {
                 </header>
 
 
+          
 
                 <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-inner">

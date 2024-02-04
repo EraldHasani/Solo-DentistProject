@@ -19,6 +19,7 @@ import visitAlbania from "../images/VisitAlbani1.jpeg";
 import visitAlbania3 from "../images/VisitAlbania3.jpeg";
 import visitAlbania4 from "../images/Albaniavisit5.jpeg";
 
+// import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 
 
 import AlbaniaLogo from "../images/Albaniaflag.png";
@@ -43,6 +44,12 @@ const OneClinic = (props) => {
 
   const userDataString = localStorage.getItem('user'); // Retrieve the string from localStorage
   const user = JSON.parse(userDataString);
+
+//   const { isLoaded, loadError } = useLoadScript({
+//     googleMapsApiKey: "AIzaSyDNOnnW2lR3qZJqjZ8ZO2w4K0ajm-zmyGA",
+// });
+
+
 
 
 
@@ -123,7 +130,13 @@ const OneClinic = (props) => {
   const chunkedImages = chunkArray(review, 3);
 
 
+//   const mapContainerStyle = {
+//     width: "80%",
+//     height: "200px",
+// };
 
+// if (loadError) return "Error loading maps";
+// if (!isLoaded) return "Loading maps";
 
 
 
@@ -157,7 +170,7 @@ const OneClinic = (props) => {
               <div className="cardClinicphoto">
 
                 {/* <p>{clinic.image}</p> */}
-                <img className="imgclinic" src={Clinic} alt="" />
+                <img className="imgclinic" src={clinic.image} alt="" />
               </div>
 
               <div className="card-body">
@@ -184,12 +197,25 @@ const OneClinic = (props) => {
 
 
 
+            <div className="imagesClinic">
+              <div>
+                <h1 className="text-center mt-5 mb-4 border-bottom  "> {clinic.title} Photos</h1>
+              <div className="d-flex justify-content-evenly align-items-center">
+               <img className="m-5 border" src={clinic.clinicImages1}  width="4000" height={"400px"} alt="" />
+               <img  className="m-5 border" src={clinic.clinicImages2} width="4000" height={"400px"}  alt="" />
+             
+
+                  </div>
+              </div>
+
+            </div>
 
 
 
 
 
 
+{/* 
           <div className="imagesClinic">
 
             <div className="containerOneclinic-fluid p-2">
@@ -202,7 +228,10 @@ const OneClinic = (props) => {
                         {chunk.map((review, idx) => (
                           <div className="card m-4" style={{ maxWidth: '400px' }} key={idx}>
                             <div className="card-body">
-                              <p className="card-text text-dark" >{visitAlbania}</p>
+                            <img src={clinic.clinicImages} alt="" />
+
+                              <img src={visitAlbania} alt="" width={"100%"} />
+                              <p className="card-text text-dark" ></p>
                             </div>
                           </div>
                         ))}
@@ -221,7 +250,7 @@ const OneClinic = (props) => {
               </div>
             </div>
 
-          </div>
+          </div> */}
 
 
 
@@ -236,7 +265,7 @@ const OneClinic = (props) => {
 
             <div className="d-flex justify-content-between">
               <p className="m-4 fs-5">{clinic.description}</p>
-              <img className="m-5" src={Clinic} alt="" width="300" height="300" />
+              <img className="m-5" src={clinic.clinicImages} alt="" width="300" height="300" />
             </div>
 
           </div>
@@ -271,7 +300,7 @@ const OneClinic = (props) => {
             staff.map((staff, index) => (
               <div key={index} className="cardstaff d-flex justify-content- ">
                 <div className="staffClinicphoto ">
-                  <img className="imgstaff" src={Clinic} alt="" />
+                  <img className="imgstaff" src={staff.imageStaff} alt="" />
                   {/* <p className=" fs-6" >• image: {staff.imageStaff}</p>   */}
                   <p className="">{staff.firstName} {staff.lastName}</p>
                   <p className=" fs-6" >{staff.experience} vite eksperienc</p>
@@ -416,6 +445,26 @@ const OneClinic = (props) => {
             <div></div>
           )
         }
+
+
+
+{/* <div className="single-map">
+            <GoogleMap 
+                mapContainerStyle={mapContainerStyle}
+                zoom={20}
+                center={{
+                    lat: clinic.lat,
+                    lng: clinic.long,
+                }}
+            >
+                <MarkerF
+                    position={{
+                        lat: clinic.lat,
+                        lng: clinic.long,
+                    }}
+                />
+            </GoogleMap>
+            </div> */}
 
 
         

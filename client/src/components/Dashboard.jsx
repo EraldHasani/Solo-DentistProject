@@ -136,7 +136,7 @@ const Dashboard = (props) => {
                                         <div className="cardClinic d-flex justify-content-between ">
                                             <div className="cardClinicphoto">
                                                 {/* <p>{clinic.image}</p> */}
-                                                <img className="imgclinic" src={Clinic} alt="" />
+                                                <img className="imgclinic" src={clinic.image} alt="" />
                                             </div>
                                             <div className="card-body">
                                                 <Link className="text-white" to={`/clinic/${clinic._id}`} style={{ textDecoration: 'none' }}> <h5 className="fs-2" >{clinic.title}</h5> </Link>

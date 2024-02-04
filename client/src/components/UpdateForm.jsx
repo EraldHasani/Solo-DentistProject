@@ -23,6 +23,8 @@ const UpdateForm = () => {
     const [image, setImage] = useState("");
     const [desc, setDesc] = useState("");
     const [clinicImages, setClinicImages] = useState("");
+    const [clinicImages1, setClinicImages1] = useState("");
+    const [clinicImages2, setClinicImages2] = useState("");
     const [sherbime, setSherbime] = useState("");
     const [cash, setCash] = useState(false);
     const [creditCard, setCreditCard] = useState(false);
@@ -65,6 +67,10 @@ const UpdateForm = () => {
                 setDescription(res.data.clinic.description);
                 setImage(res.data.clinic.image);
                 setClinicImages(res.data.clinic.clinicImages);
+                setClinicImages1(res.data.clinic.clinicImages1);
+                setClinicImages2(res.data.clinic.clinicImages2);
+            
+
                 setCash(res.data.clinic.cash);
                 setCreditCard(res.data.clinic.creditCard);
                 setBankTransfer(res.data.clinic.bankTransfer);
@@ -90,6 +96,8 @@ const UpdateForm = () => {
                 email: email,
                 image: image,
                 clinicImages: clinicImages,
+                clinicImages1: clinicImages1,
+                clinicImages2: clinicImages2,
                 cash: cash,
                 card: creditCard,
                 bankTransfer: bankTransfer,
@@ -106,7 +114,7 @@ const UpdateForm = () => {
             .then((res) => {
                 console.log(res.data);
                 if (title.length < 5 || address.length < 5 || city.length < 3 || phone.length < 10 || description.length < 10) {
-                    setErrors("Form has some problems")
+                    setErrors("Ju lutem plotesoni sakt te dhenat tuaja")
 
                 } else {
                     setTitle("");
@@ -117,6 +125,8 @@ const UpdateForm = () => {
                     setDescription("");
                     setImage("");
                     setClinicImages("");
+                    setClinicImages1("");
+                    setClinicImages2("");
                     setCash(false);
                     setCreditCard(false);
                     setBankTransfer(false);
@@ -247,6 +257,11 @@ const UpdateForm = () => {
     };
 
 
+    function validateEmail(email) {
+        const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return regexp.test(email);
+    }
+
 
 
 
@@ -270,11 +285,19 @@ const UpdateForm = () => {
                     <label htmlFor="title">Title</label>
                     <input type="text" name="title" value={title} className="form-control" onChange={(e) => setTitle(e.target.value)} placeholder="Clinic nane" />
                 </div>
+                {
+                    title.length > 0 && title.length < 5 ?
+                        <p className="text-danger"> Title sholud be more than 5 characters! </p> : null
+                }
 
                 <div className="form-group">
                     <label htmlFor="address">Address</label>
                     <input type="text" name="address" value={address} className="form-control" onChange={(e) => setAddress(e.target.value)} placeholder="Address" />
                 </div>
+                {
+                    address.length > 0 && address.length < 5 ?
+                        <p className="text-danger"> Address sholud be more than 5 characters! </p> : null
+                }
 
                 <div className="form-group">
                     <label htmlFor="city">City</label>
@@ -318,11 +341,20 @@ const UpdateForm = () => {
 
 
                 </div>
-
+                {
+                    city.length ? null :
+                        <p className="text-danger"> Please select one city! </p>
+                }
                 <div className="form-group">
                     <label htmlFor="email">Email</label>
                     <input type="email" name="email" value={email} className="form-control" onChange={(e) => setEmail(e.target.value)} placeholder="Please enter your Email" />
                 </div>
+                {
+                        email.length > 0 && !validateEmail(email) ?
+                            <p className="text-danger"> Email sholud be correct! </p> : null
+                            
+                    }
+
 
 
 
@@ -330,22 +362,44 @@ const UpdateForm = () => {
                     <label htmlFor="phone">Phone</label>
                     <input type="phone" name="phone" value={phone} className="form-control" onChange={(e) => setPhone(e.target.value)} placeholder="Please enter your phone number" />
                 </div>
+                {
+                    phone.length > 0 && phone.length < 10 ?
+                        <p className="text-danger"> Phone sholud be correct! </p> : null
+                }
 
                 <div className="form-group">
                     <label htmlFor="description">Description</label>
                     <textarea type="text" name="description" value={description} className="form-control" onChange={(e) => setDescription(e.target.value)} placeholder="Please add some information about your clinic" />
                 </div>
+                {
+                    description.length > 0 && description.length < 10 ?
+                        <p className="text-danger"> Description about your clinic sholud be more than 10 characters! </p> : null
+                }
 
                 <div className="form-group">
                     <label htmlFor="image">Image</label>
-                    <input type="file" multiple name="image" className="form-control" onChange={(e) => setImage(e.target.value)} placeholder="Please add one display image " />
+                    <input type="text" multiple name="image" className="form-control" onChange={(e) => setImage(e.target.value)} placeholder="Please add one display image " />
                 </div>
+                {
+                    image.length > 0 && image.length < 1 ?
+                        <p className="text-danger"> Please upload an image! </p> : null
+                }
 
-                <div>
+                <div> 
                     <label htmlFor="clinicImages">Clinic Images</label>
-                    <input type="file" name="clinicImages" className="form-control" onChange={(e) => setClinicImages(e.target.value)} placeholder="Please add some images of your clinic" />
-                </div>
+                    <label htmlFor="clinicImages"> Image 1</label>
+                    <input type="text" name="clinicImages" className="form-control" onChange={(e) => setClinicImages(e.target.value)} placeholder="Please add some images of your clinic" />
+                    <label htmlFor="clinicImages">Image 2</label>
+                    <input type="text" name="clinicImages" className="form-control" onChange={(e) =>  setClinicImages1(e.target.value )} placeholder="Please add some images of your clinic" />
+                    <label htmlFor="">Image 3</label>
+                    <input type="text" name="clinicImages" className="form-control" onChange={(e) =>  setClinicImages2(e.target.value )} placeholder="Please add some images of your clinic" />
 
+
+                    
+                    {/*
+                    <label htmlFor="clinicImages">Image 4</label>
+                    <input type="text" name="clinicImages" className="form-control" onChange={(e) =>  setClinicImages([...clinicImages,e.target.value] )} placeholder="Please add some images of your clinic" /> */}
+                </div>
 
                 <div>
                     <h1 className="m-2"> Update Payment</h1>
@@ -379,20 +433,58 @@ const UpdateForm = () => {
                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div className="modal-body m-2">
-                                    <input type="text" value={servicesTitle} name="sherbime" className="form-control" placeholder="Titulli i sherbimit"
-                                        onChange={(e) => setServicesTitle(e.target.value)} />
-                                    <br />
-                                    <input type="text" value={servicesDescription} name="sherbime" className="form-control" placeholder="Pershkrimi i sherbimit"
-                                        onChange={(e) => setServicesDescription(e.target.value)} />
-                                    <br />
-                                    <input type="number" value={servicesDuration} min="0" name="sherbime" className="form-control" placeholder="Koha e sherbimit"
-                                        onChange={(e) => setServicesDuration(e.target.value)} />
-                                    <br />
-                                    <input type="text" value={servicesType} name="sherbime" className="form-control" placeholder="Tipi i sherbimit"
-                                        onChange={(e) => setServicesType(e.target.value)} />
-                                    <br />
-                                    <input type="number" value={servicesPrice} min="0" name="sherbime" className="form-control" placeholder="Cmimi i sherbimit"
-                                        onChange={(e) => setServicesPrice(e.target.value)} />
+                                <div>
+                                        <label htmlFor="">Titulli i sherbimit</label>
+                                        <input type="text" value={servicesTitle} name="sherbime" className="form-control" placeholder="Titulli i sherbimit"
+                                            onChange={(e) => setServicesTitle(e.target.value)} />
+                                        <br />
+                                    </div>
+
+                                    {servicesTitle.length > 0 && servicesTitle.length < 5 ?
+                                        <p className="text-danger"> Titulli i sherbimit sholud be more than 5 characters! </p> : null
+                                    }
+
+                                    <div>
+                                        <label htmlFor="">Pershkrimi i sherbimit    </label>
+                                        <input type="text" value={servicesDescription} name="sherbime" className="form-control" placeholder="Pershkrimi i sherbimit"
+                                            onChange={(e) => setServicesDescription(e.target.value)} />
+                                        <br />
+
+                                    </div>
+                                    {servicesDescription.length > 0 && servicesDescription.length < 10 ?
+                                        <p className="text-danger"> Pershkrimi i sherbimit sholud be more than 10 characters! </p> : null
+                                    }
+
+                                    <div>
+                                        <label htmlFor="">Koha per sherbimin (ne dite)</label>
+                                        <input type="number" value={servicesDuration} min="0" name="sherbime" className="form-control" placeholder="Koha e sherbimit"
+                                            onChange={(e) => setServicesDuration(e.target.value)} />
+                                        <br />
+                                    </div>
+                                    {
+                                        servicesDuration <= 0 ?
+                                            <p className="text-danger"> Koha e sherbimit eshte e detyrueshme </p> : null
+                                    }
+                                    <div>
+                                        <label htmlFor="">Tipi i sherbimit</label>
+                                        <input type="text" value={servicesType} name="sherbime" className="form-control" placeholder="Tipi i sherbimit"
+                                            onChange={(e) => setServicesType(e.target.value)} />
+                                        <br />
+                                    </div>
+                                    {
+                                        servicesType.length > 0 && servicesType.length < 5 ?
+                                            <p className="text-danger"> Tipi i sherbimit duhet te jete me i gjate se 5 karaktere! </p> : null
+
+                                    }
+                                    <div>
+                                        <label htmlFor="">Cimi i sherbimit (€)</label>
+                                        <input type="number" value={servicesPrice} min="0" name="sherbime" className="form-control" placeholder="Cmimi i sherbimit "
+                                            onChange={(e) => setServicesPrice(e.target.value)} />
+                                    </div>
+                                    {
+                                        servicesPrice == 0 ?
+                                            <p className="text-danger"> Cmimi i sherbimit duhet te jete i sakt! </p> : null
+                                    }
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -441,14 +533,17 @@ const UpdateForm = () => {
                         <div className="modal fade" id="shtoStaff" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div className="modal-dialog">
                                 <div className="modal-content">
-                                    <div className="modal-header">
+                                <div className="modal-header">
                                         <h1 className="modal-title fs-5" id="exampleModalLabel" >Shto staff te ri</h1>
                                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div className="">
+
+                                    <div className="modal-body">
+                                        <div>
                                             <label > Emri</label>
                                             <input type="text" value={firstName} name="staff" className="form-control" placeholder="Emri "
-                                                onChange={(e) => setFirstName(e.target.value)} /></div>
+                                                onChange={(e) => setFirstName(e.target.value)} />
+                                        </div>
                                         <div>
                                             {
                                                 firstName.length > 0 && firstName.length < 3 ?
@@ -468,7 +563,8 @@ const UpdateForm = () => {
                                             <label >Eksperienca</label>
 
                                             <input type="number" value={experience} name="staff" min="0" className="form-control" placeholder="Vitet e eksperiences "
-                                                onChange={(e) => setExperience(e.target.value)} /></div>
+                                                onChange={(e) => setExperience(e.target.value)} />
+                                                </div>
                                         <div>
 
                                             <label >Specializimi</label>
@@ -493,8 +589,10 @@ const UpdateForm = () => {
                                             }
                                             <label >Foto personit</label>
 
-                                            <input type="file" value={imageStaff} name="staff" className="form-control" placeholder="Foto e staffit"
+                                            <input type="text" value={imageStaff} name="staff" className="form-control" placeholder="Foto e staffit"
                                                 onChange={(e) => setImageStaff(e.target.value)} /></div>
+
+                                    </div>
                                     <div className="modal-footer">
                                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                         <button type="button" className="btn btn-primary" onClick={updateStaff} data-bs-dismiss="modal" >Krijo staff</button>
@@ -514,7 +612,7 @@ const UpdateForm = () => {
                                                 <div className="cardservice ">
                                                     <div className="cardservice-body ">
                                                         <h5 className="card-title mb-4">{staff.firstName} {staff.lastName}</h5>
-                                                        <p className="card-text">Eksperienca: {staff.experience} years</p>
+                                                        <p className="card-text">Eksperienca: {staff.experience} vite</p>
                                                         <p className="card-text">Ekspertiza: {staff.expertise}</p>
                                                         <p className="card-text">Edukimi: {staff.education}</p>
                                                         <p className="card-text">Foto: {staff.imageStaff}</p>
