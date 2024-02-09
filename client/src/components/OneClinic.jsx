@@ -15,9 +15,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import VideoLogo from "../images/VideoLogo.mp4";
 import { SocialIcon } from 'react-social-icons'
-import visitAlbania from "../images/VisitAlbani1.jpeg";
-import visitAlbania3 from "../images/VisitAlbania3.jpeg";
-import visitAlbania4 from "../images/Albaniavisit5.jpeg";
+
 
 // import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 

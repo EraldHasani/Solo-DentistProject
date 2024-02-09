@@ -8,12 +8,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { useAuth } from '../AuthContext';
 import Navbar from "./Navbar";
-import img1 from "../images/sfondImage.png";
-import video1 from "../images/airplane.mp4";
+
 import { SocialIcon } from 'react-social-icons'
 import VideoLogo from "../images/VideoLogo.mp4";
 import Albania from "../images/ALBANIA.mp4";
-import Clinic from "../images/Clinic.jpg";
 import AlbaniaLogo from "../images/AlbaniaFlag.png";
 const Dashboard = (props) => {
     const userId = localStorage.getItem('userId');

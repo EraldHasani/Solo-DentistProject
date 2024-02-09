@@ -5,7 +5,7 @@ import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Tab, Box } from '@mui/material';
 import PhoneIcon from '@mui/icons-material/Phone';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import loginphoto from '../images/login.jpg'
+import loginphoto from '../images/Login.jpg'
 
 
 const Register = () => {
