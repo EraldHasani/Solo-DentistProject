@@ -516,7 +516,7 @@ const Form = (props) => {
                                                 onChange={(e) => setExperience(e.target.value)} />
                                                 </div>
                                         <div>
-
+ 
                                             <label >Specializimi</label>
 
                                             <input type="text" value={expertise} name="staff" className="form-control" placeholder="Ekspertiza"

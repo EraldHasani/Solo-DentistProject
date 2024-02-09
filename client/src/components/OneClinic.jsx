@@ -292,7 +292,6 @@ const OneClinic = (props) => {
         </div>
 
 
-
         <div className=" ">
           <h1 className="border-bottom m-5">Meet the Staff</h1>
 

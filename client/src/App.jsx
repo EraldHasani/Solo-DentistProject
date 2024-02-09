@@ -5,7 +5,6 @@ import WelcomePage from './components/WelcomePage'
 import Login from './components/Login'
 import Register from './components/Register'
 import Form from './components/Form'
-import Navbar from './components/Navbar'
 import Dashboard from './components/Dashboard'
 import Albania from './components/Albania'
 import OneClinic from './components/OneClinic'
@@ -26,7 +25,6 @@ function App() {
           {
             token ?(
               <>
-                <Route path="/" element={<WelcomePage  user={user}/>} />
                 <Route path="create" element={<Form  user={user}/>} />
                 <Route path="create" element={<Form  user={user}/>} />
                 <Route path="albania" element={<Albania/>}/>
@@ -41,10 +39,9 @@ function App() {
             ) :
             (
             <>
-                            <Route path ="/dashboard" element={<Dashboard/>}/>
+                            <Route path ="/" element={<Dashboard/>}/>
                             <Route path="/register" element={<Register />} />
                             <Route path="albania" element={<Albania/>}/>
-                            <Route path="/" element={<WelcomePage />} />
                              <Route path="/login" element={<Login />} />
 
 
