@@ -22,7 +22,7 @@ import visitAlbania4 from "../images/Albaniavisit5.jpeg";
 // import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 
 
-import AlbaniaLogo from "../images/Albaniaflag.png";
+import AlbaniaLogo from "../images/AlbaniaFlag.png";
 // import StarRatingPicker from './StarRatingPicker';  
 
 
