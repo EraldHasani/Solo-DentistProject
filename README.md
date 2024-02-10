@@ -24,7 +24,4 @@ ClinicLink is a web application that connects customers with clinics, allowing c
 - Node.js and npm should be installed on your system.
 - MongoDB should be installed and running.
 
-### Installation
-
-1. Clone the repository:
 
